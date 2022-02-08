@@ -35,4 +35,33 @@ public class FiscaliaService {
             return null;
         }
     }
+
+    public Fiscalia addFiscalia(Fiscalia fiscalia) {
+        try {
+            logger.info("AGREGAR FISCALIA");
+            return fiscaliaRepo.save(fiscalia);
+        } catch (Exception e) {
+            logger.severe(("ERROR AGREGANDO UNA FISCALIA" + e.getMessage()));
+            return null;
+        }
+    }
+
+    public Fiscalia removeFiscalia(Integer fiscaliaId) {
+        try {
+            logger.info("ELIMINAR FISCALIA");
+
+            Optional<Fiscalia> fiscalia = fiscaliaRepo.findById(fiscaliaId);
+
+            if (fiscalia.isEmpty()) {
+                return null;
+            } else {
+                fiscaliaRepo.deleteById(fiscaliaId);
+                return fiscalia.get();
+            }
+
+        } catch (Exception e) {
+            logger.severe(("ERROR ELIMINANDO FISCALIA" + e.getMessage()));
+            return null;
+        }
+    }
 }
